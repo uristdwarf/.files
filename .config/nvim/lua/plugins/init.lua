@@ -50,6 +50,10 @@ require('lazy').setup({
 				},
 			},
 		}
+
+		for k, v in pairs(servers) do
+			require('lspconfig')[k].setup(v)
+		end
 	end
 	},
 	{
