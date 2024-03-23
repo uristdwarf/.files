@@ -5,6 +5,16 @@ local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+-- Quick fix
+local notify = vim.notify
+vim.notify = function(msg, ...)
+    if msg:match("warning: multiple different client offset_encodings") then
+        return
+    end
+
+    notify(msg, ...)
+end
+
 
 require("neodev").setup()
 
