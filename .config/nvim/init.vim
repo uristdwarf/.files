@@ -142,7 +142,7 @@ call plug#begin()
 	Plug 'simrat39/rust-tools.nvim'
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'mfussenegger/nvim-dap'
-	Plug 'rcarriga/nvim-dap-ui'
+	" Plug 'rcarriga/nvim-dap-ui'
 
 	Plug 'tpope/vim-sleuth'
 
@@ -205,7 +205,7 @@ sign define LspDiagnosticsSignHint text=🟢
 luafile ~/.vim/formatter.lua
 
 " debugger config
-luafile ~/.vim/dap_config.lua
+" luafile ~/.vim/dap_config.lua
 
 " linter config
 luafile ~/.vim/linters.lua
