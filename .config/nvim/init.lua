@@ -26,18 +26,22 @@ vim.opt.autowrite = true
 
 vim.opt.scrolloff = 10
 
+vim.opt.termguicolors = true
+
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
 -- Global mappings
 vim.keymap.set('n', 'Q', "")
 
 local arrow_message = '<cmd> echoe "GET OFF MY COMPUTER YOU PLEB! (use hjkl)"<cr>'
-local disabled_modes = {'n', 'i'}
+local disabled_modes = { 'n', 'i' }
 vim.keymap.set(disabled_modes, '<Left>', arrow_message)
 vim.keymap.set(disabled_modes, '<Right>', arrow_message)
 vim.keymap.set(disabled_modes, '<Up>', arrow_message)
 vim.keymap.set(disabled_modes, '<Down>', arrow_message)
 
 -- Disable highlighting
-vim.keymap.set('n', '<C-l>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<c-l>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
