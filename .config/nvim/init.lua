@@ -41,7 +41,7 @@ vim.keymap.set(disabled_modes, '<Up>', arrow_message)
 vim.keymap.set(disabled_modes, '<Down>', arrow_message)
 
 -- Disable highlighting
-vim.keymap.set('n', '<c-l>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -65,6 +65,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
+})
+-- Set filetype to shell when using C-x C-e from terminal
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "/tmp/bash-fc*",
+    callback = function()
+        vim.bo.filetype = "sh"
+    end,
 })
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
