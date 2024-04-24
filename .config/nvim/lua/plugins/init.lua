@@ -53,7 +53,7 @@ require('lazy').setup({
       require("nvim-tree").setup()
     end,
     keys = {
-      { '<F5>', '<cmd>NvimTreeToggle<CR>', { desc = 'Open file tree' } }
+      { '<F5>', '<cmd>NvimTreeToggle<CR>', desc = 'Open file tree' }
     }
   },
 
@@ -78,7 +78,22 @@ require('lazy').setup({
       vim.cmd.hi 'Comment gui=none'
     end,
   },
-
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.6',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    keys = {
+      { '<C-p>',      function() require('telescope.builtin').find_files() end,          desc = 'Search files' },
+      { '<leader>fg', function() require('telescope.builtin').live_grep() end,           desc = 'Grep files' },
+      { '<leader>\\', function() require('telescope.builtin').buffers() end,             desc = 'Buffers' },
+      { '<leader>gs', function() require('telescope.builtin').grep_string() end,         desc = 'Grep string' },
+      { 'gr',         function() require('telescope.builtin').lsp_references() end,      desc = '[LSP] References' },
+      { 'gE',         function() require('telescope.builtin').diagnostics() end,         desc = '[LSP] Diagnostics' },
+      { 'gd',         function() require('telescope.builtin').lsp_definitions() end,     desc = '[LSP] Diagnostics' },
+      { 'gi',         function() require('telescope.builtin').lsp_implementations() end, desc = '[LSP] Diagnostics' },
+    }
+  },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -98,6 +113,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
 
       -- If you want to add a bunch of pre-configured snippets,
       --    you can use this plugin to help you. It even has snippets
