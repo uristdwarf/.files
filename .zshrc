@@ -191,3 +191,6 @@ alias agdb='arm-none-eabi-gdb'
 
 # Created by `pipx` on 2023-09-11 10:07:48
 export PATH="$PATH:/home/urist/.local/bin"
+
+# Edit commands in the editor
+bindkey '\C-x\C-e' edit-command-line
