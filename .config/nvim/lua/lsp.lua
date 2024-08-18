@@ -42,6 +42,7 @@ local function lsp_setup()
     -- },
     pyright = {},
     lua_ls = require('langs.lua').lsp,
+    bashls = {},
     taplo = {
       keys = {
         {

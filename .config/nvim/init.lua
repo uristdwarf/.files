@@ -33,12 +33,12 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 -- Global mappings
 vim.keymap.set('n', 'Q', "")
 
-local arrow_message = '<cmd> echoe "GET OFF MY COMPUTER YOU PLEB! (use hjkl)"<cr>'
-local disabled_modes = { 'n', 'i' }
-vim.keymap.set(disabled_modes, '<Left>', arrow_message)
-vim.keymap.set(disabled_modes, '<Right>', arrow_message)
-vim.keymap.set(disabled_modes, '<Up>', arrow_message)
-vim.keymap.set(disabled_modes, '<Down>', arrow_message)
+-- local arrow_message = '<cmd> echoe "GET OFF MY COMPUTER YOU PLEB! (use hjkl)"<cr>'
+-- local disabled_modes = { 'n', 'i' }
+-- vim.keymap.set(disabled_modes, '<Left>', arrow_message)
+-- vim.keymap.set(disabled_modes, '<Right>', arrow_message)
+-- vim.keymap.set(disabled_modes, '<Up>', arrow_message)
+-- vim.keymap.set(disabled_modes, '<Down>', arrow_message)
 
 -- Disable highlighting
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
