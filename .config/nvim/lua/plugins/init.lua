@@ -11,13 +11,13 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- 	-- Automatically install LSPs and related tools to stdpath for neovim
-      -- 	'williamboman/mason.nvim',
-      -- 	'williamboman/mason-lspconfig.nvim',
-      -- 	'WhoIsSethDaniel/mason-tool-installer.nvim',
+      { 'williamboman/mason.nvim', config=true },
+      'williamboman/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- 	-- Useful status updates for LSP.
       -- 	-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      -- 	{ 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
     },
     config = require('lsp') -- Config is its own module
   },
@@ -30,6 +30,7 @@ require('lazy').setup({
 
   'tpope/vim-fugitive',
   'tpope/vim-sleuth',
+  'pearofducks/ansible-vim',
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -241,5 +242,8 @@ require('lazy').setup({
   },
   {
     'chaoren/vim-wordmotion'
+  },
+  {
+    "aserowy/tmux.nvim",
   },
 })

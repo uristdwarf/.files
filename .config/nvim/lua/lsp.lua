@@ -32,7 +32,7 @@ local function lsp_setup()
   vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = '[LSP] Code Action' })
   vim.keymap.set('n', '<leader>td', toggle_diagnostics, { desc = '[LSP] Toggle diagnostics' })
 
-  local servers = {
+  local mason_servers = {
     clangd = {},
     gopls = {},
     -- rust_analyzer = {
@@ -60,9 +60,29 @@ local function lsp_setup()
     },
   }
 
-  for k, v in pairs(servers) do
-    lspconfig[k].setup(v)
-  end
+	local manual_servers = {
+		gdscript = {},
+	}
+
+	for k, v in pairs(manual_servers) do
+		lspconfig[k].setup(v)
+	end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+  require('mason-lspconfig').setup {
+    handlers = {
+      function(server_name)
+        local server = mason_servers[server_name] or {}
+        -- This handles overriding only values explicitly passed
+        -- by the server configuration above. Useful when disabling
+        -- certain features of an LSP (for example, turning off formatting for tsserver)
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        require('lspconfig')[server_name].setup(server)
+      end,
+    }
+  }
 end
 
 return lsp_setup

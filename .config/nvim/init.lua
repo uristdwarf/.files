@@ -54,6 +54,14 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<C-w>\\', '<C-w>v', { desc = 'Split window vertically' })
 vim.keymap.set('n', '<C-w>-', '<C-w>s', { desc = 'Split window horizontally' })
 
+-- Enable titles
+vim.opt.title = true
+vim.opt.titlelen = 0
+
+vim.cmd('highlight ExtraWhitespace ctermbg=red guibg=red')
+vim.cmd('match ExtraWhitespace /\\s\\+$/')
+
+
 -- Autocmds
 
 -- Highlight when yanking (copying) text
@@ -72,6 +80,11 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     callback = function()
         vim.bo.filetype = "sh"
     end,
+})
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+    callback = function()
+        vim.opt.titlestring = vim.fn.expand("%:t")
+    end
 })
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
