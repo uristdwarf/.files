@@ -30,7 +30,7 @@ require('lazy').setup({
 
   'tpope/vim-fugitive',
   'tpope/vim-sleuth',
-  'pearofducks/ansible-vim',
+  -- 'pearofducks/ansible-vim',
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -246,4 +246,6 @@ require('lazy').setup({
   {
     "aserowy/tmux.nvim",
   },
+  -- {'ckipp01/nvim-jenkinsfile-linter', dependencies = { "nvim-lua/plenary.nvim" } },
+  -- lazy.nvim
 })

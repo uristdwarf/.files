@@ -33,7 +33,10 @@ local function lsp_setup()
   vim.keymap.set('n', '<leader>td', toggle_diagnostics, { desc = '[LSP] Toggle diagnostics' })
 
   local mason_servers = {
-    clangd = {},
+    clangd = {
+      cmd = { "clangd", "--background-index", "--compile-commands-dir=./" }
+    },
+    root_dir = require('lspconfig.util').root_pattern('compile_commands.json', 'CMakeLists.txt', '.git'),
     gopls = {},
     -- rust_analyzer = {
     --   diagnostics = {

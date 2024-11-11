@@ -81,6 +81,15 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
         vim.bo.filetype = "sh"
     end,
 })
+
+-- Set ansible filetype
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*/playbooks/*.y*ml",
+    callback = function()
+        vim.bo.filetype = "yaml.ansible"
+    end,
+})
+
 vim.api.nvim_create_autocmd({"BufEnter"}, {
     callback = function()
         vim.opt.titlestring = vim.fn.expand("%:t")
@@ -97,3 +106,4 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugin manager (in another file)
 require('plugins')
+vim.keymap.set('n', 'ge', vim.diagnostic.open_float, { desc = '[LSP] List diagnostics' })
