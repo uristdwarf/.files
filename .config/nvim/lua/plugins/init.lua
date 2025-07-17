@@ -64,7 +64,10 @@ require('lazy').setup({
     config = function()
       require('nvim-treesitter.configs').setup {
         auto_install = true,
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          disable = { "dockerfile", "htmldjango" },
+        },
         indent = { enable = true },
       }
     end
@@ -81,7 +84,7 @@ require('lazy').setup({
   },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.6',
+    branch = 'master',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
@@ -134,60 +137,24 @@ require('lazy').setup({
       })
     end
   },
-  -- {
-  --   'mrcjkb/rustaceanvim',
-  --   version = '^4', -- Recommended
-  --   ft = { 'rust' },
-  --   config = function()
-  --     vim.g.rustaceanvim = {
-  --       -- inlay_hints = {
-  --       --   highlight = "NonText",
-  --       -- },
-  --       server = {
-  --         default_settings = {
-  --           -- on_attach = function(client, bufnr)
-  --           -- end,
-  --           ["rust-analyzer"] = {
-  --             cargo = {
-  --               allFeatures = true,
-  --               loadOutDirsFromCheck = true,
-  --               runBuildScripts = true,
-  --             },
-  --             -- Add clippy lints for Rust.
-  --             checkOnSave = {
-  --               allFeatures = true,
-  --               command = "clippy",
-  --               extraArgs = { "--no-deps" },
-  --             },
-  --             procMacro = {
-  --               enable = true,
-  --               ignored = {
-  --                 ["async-trait"] = { "async_trait" },
-  --                 ["napi-derive"] = { "napi" },
-  --                 ["async-recursion"] = { "async_recursion" },
-  --               },
-  --             },
-  --           },
-  --         }
-  --       },
-  --     }
-  --   end,
-  -- },
   {
-    'https://github.com/simrat39/rust-tools.nvim',
-    ft = "rust",
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    ft = { 'rust' },
     config = function()
-      require("rust-tools").setup({
+      vim.g.rustaceanvim = {
+        -- inlay_hints = {
+        --   highlight = "NonText",
+        -- },
         server = {
-          settings = {
-            -- rust-analyzer language server configuration
+          default_settings = {
+            -- on_attach = function(client, bufnr)
+            -- end,
             ["rust-analyzer"] = {
               cargo = {
                 allFeatures = true,
                 loadOutDirsFromCheck = true,
-                buildScripts = {
-                  enable = true,
-                },
+                runBuildScripts = true,
               },
               -- Add clippy lints for Rust.
               checkOnSave = {
@@ -205,10 +172,46 @@ require('lazy').setup({
               },
             },
           }
-        }
-      })
-    end
+        },
+      }
+    end,
   },
+  -- {
+  --   'https://github.com/simrat39/rust-tools.nvim',
+  --   ft = "rust",
+  --   config = function()
+  --     require("rust-tools").setup({
+  --       server = {
+  --         settings = {
+  --           -- rust-analyzer language server configuration
+  --           ["rust-analyzer"] = {
+  --             cargo = {
+  --               allFeatures = true,
+  --               loadOutDirsFromCheck = true,
+  --               buildScripts = {
+  --                 enable = true,
+  --               },
+  --             },
+  --             -- Add clippy lints for Rust.
+  --             checkOnSave = {
+  --               allFeatures = true,
+  --               command = "clippy",
+  --               extraArgs = { "--no-deps" },
+  --             },
+  --             procMacro = {
+  --               enable = true,
+  --               ignored = {
+  --                 ["async-trait"] = { "async_trait" },
+  --                 ["napi-derive"] = { "napi" },
+  --                 ["async-recursion"] = { "async_recursion" },
+  --               },
+  --             },
+  --           },
+  --         }
+  --       }
+  --     })
+  --   end
+  -- },
   {
     "ray-x/go.nvim",
     dependencies = { -- optional packages

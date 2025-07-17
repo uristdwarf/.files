@@ -23,7 +23,7 @@ local function lsp_setup()
   local lspconfig = require('lspconfig')
 
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[LSP] Go to definition' })
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = '[LSP] Go to implementation' })
+  vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = '[LSP] Go to implementation' })
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = '[LSP] Go to references' })
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[LSP] Go to declaration' })
   vim.keymap.set('n', 'ge', vim.diagnostic.open_float, { desc = '[LSP] List diagnostics' })
@@ -34,16 +34,18 @@ local function lsp_setup()
 
   local mason_servers = {
     clangd = {
-      cmd = { "clangd", "--background-index", "--compile-commands-dir=./" }
+      filetypes = { "c", "cpp", },
+      -- cmd = { "clangd", "--background-index", "--compile-commands-dir=./build" },
+      -- root_dir = require('lspconfig.util').root_pattern('compile_commands.json', 'CMakeLists.txt', '.git'),
     },
-    root_dir = require('lspconfig.util').root_pattern('compile_commands.json', 'CMakeLists.txt', '.git'),
     gopls = {},
     -- rust_analyzer = {
     --   diagnostics = {
     --     enable = true,
-    --   }
+    --   },
+    --   checkOnSave = true
     -- },
-    pyright = {},
+    -- pyright = {},
     lua_ls = require('langs.lua').lsp,
     bashls = {},
     taplo = {
@@ -63,16 +65,23 @@ local function lsp_setup()
     },
   }
 
-	local manual_servers = {
-		gdscript = {},
-	}
+  local manual_servers = {
+    gdscript = {},
+  }
 
-	for k, v in pairs(manual_servers) do
-		lspconfig[k].setup(v)
-	end
+  for k, v in pairs(manual_servers) do
+    lspconfig[k].setup(v)
+  end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+  for server, config in pairs(mason_servers) do
+    if config ~= nil then
+      config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+      vim.lsp.config[server] = config
+    end
+  end
 
   require('mason-lspconfig').setup {
     handlers = {
@@ -84,6 +93,7 @@ local function lsp_setup()
         server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
         require('lspconfig')[server_name].setup(server)
       end,
+      ["clangd"] = function() end,
     }
   }
 end

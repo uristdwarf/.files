@@ -154,6 +154,7 @@ alias cr='cargo run'
 alias ct='cargo test'
 alias cc='cargo check'
 alias cb='cargo build'
+alias gb='git branch --sort=-committerdate'
 
 alias tmux='TERM=screen-256color tmux'
 
@@ -198,3 +199,4 @@ export PATH="$PATH:/home/urist/.local/bin"
 
 # Edit commands in the editor
 bindkey '\C-x\C-e' edit-command-line
+fpath=(~/.zsh.d/ $fpath)
