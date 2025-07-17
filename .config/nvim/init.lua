@@ -84,7 +84,7 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 
 -- Set ansible filetype
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-    pattern = "*/playbooks/*.y*ml",
+    pattern = {"*/playbooks/*.y*ml", "*/roles/**/*.y*ml"},
     callback = function()
         vim.bo.filetype = "yaml.ansible"
     end,
