@@ -111,6 +111,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+# NPM package path
+# export PATH="$HOME/.npm-packages:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -153,6 +155,8 @@ alias ct='cargo test'
 alias cc='cargo check'
 alias cb='cargo build'
 
+alias tmux='TERM=screen-256color tmux'
+
 # RUST aliases with variables: cargo new $ and cargo new --lib $
 cn() {	cargo new "$1" }
 cnl() {	cargo new --lib "$1" }
@@ -171,12 +175,12 @@ export XMODIFIERS=@im=fcitx
 # disable instant prompt warning
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # tmux autostart
-if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-    tmux attach || tmux 
-fi
+# if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+#     tmux attach || tmux 
+# fi
 
 # ssh tmux
-alias ssh='TERM=xterm ssh'
+# alias ssh='TERM=xterm ssh'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
